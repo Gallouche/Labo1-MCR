@@ -2,6 +2,6 @@
 !.gitignore
 !src/
 !src/*
-!src/view/
-!src/view/*
+!src/views/
+!src/views/*
 !UML_Lab01_MCR.mdj
