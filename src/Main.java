@@ -8,7 +8,6 @@ import views.*;
 public class Main {
     public static void main(String[] args) {
 
-
         JFrame f = new JFrame("");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         f.getContentPane().add(new MainPanel(f), BorderLayout.CENTER);

@@ -6,7 +6,7 @@ import java.awt.*;
 /**
  * Created by pierre-samuelrochat on 24.02.17.
  */
-public class MixedClock {
+public class MixedClock extends Clock {
 
     private JPanel p1;
 

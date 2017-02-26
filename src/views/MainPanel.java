@@ -27,6 +27,9 @@ public class MainPanel extends JPanel {
 
     public MainPanel(JFrame f) {
 
+        final String imagePath1 = "/Users/pierre-samuelrochat/Documents/HEIG-VD/S4/MCR/Labos/Labo1-MCR/src/views/clock1.jpg";
+        final String imagePath2 = "/Users/pierre-samuelrochat/Documents/HEIG-VD/S4/MCR/Labos/Labo1-MCR/src/views/clock2.jpg";
+
         p1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
         p2 = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
@@ -59,9 +62,22 @@ public class MainPanel extends JPanel {
         arabicClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFrame arabicClockFrame = new JFrame("Arabic Clock");
-                arabicClockFrame.getContentPane().add(new ArabicClock(arabicClockFrame), BorderLayout.CENTER);
+                arabicClockFrame.getContentPane().setPreferredSize(new Dimension(400, 400));
+                arabicClockFrame.getContentPane().add(new AnalogClock(imagePath1, arabicClockFrame), BorderLayout.CENTER);
                 arabicClockFrame.pack();
                 arabicClockFrame.setVisible(true);
+
+            }
+        });
+
+
+        romanClockButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame romanClockFrame = new JFrame("Roman Clock");
+                romanClockFrame.getContentPane().setPreferredSize(new Dimension(400, 400));
+                romanClockFrame.getContentPane().add(new AnalogClock(imagePath2, romanClockFrame), BorderLayout.CENTER);
+                romanClockFrame.pack();
+                romanClockFrame.setVisible(true);
 
             }
         });
@@ -69,19 +85,9 @@ public class MainPanel extends JPanel {
         numericClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFrame numericClockFrame = new JFrame("Numeric Clock");
-                numericClockFrame.getContentPane().add(new ArabicClock(numericClockFrame), BorderLayout.CENTER);
+                numericClockFrame.getContentPane().add(new NumericClock(numericClockFrame), BorderLayout.CENTER);
                 numericClockFrame.pack();
                 numericClockFrame.setVisible(true);
-
-            }
-        });
-
-        romanClockButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JFrame romanClockFrame = new JFrame("Roman Clock");
-                romanClockFrame.getContentPane().add(new ArabicClock(romanClockFrame), BorderLayout.CENTER);
-                romanClockFrame.pack();
-                romanClockFrame.setVisible(true);
 
             }
         });
@@ -89,12 +95,39 @@ public class MainPanel extends JPanel {
         mixedClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFrame mixedClockFrame = new JFrame("Mixed Clock");
-                mixedClockFrame.getContentPane().add(new ArabicClock(mixedClockFrame), BorderLayout.CENTER);
+                mixedClockFrame.getContentPane().add(new MixedClock(mixedClockFrame), BorderLayout.CENTER);
                 mixedClockFrame.pack();
                 mixedClockFrame.setVisible(true);
 
             }
         });
+
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        stopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        resetButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+
+            }
+        });
+
+        quitButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+
+            }
+        });
+
 
     }
 }
