@@ -1,15 +1,24 @@
 package views;
 
+import observer.Observer;
+import timer.TimerChrono;
+
 import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
 
 /**
  * Created by pierre-samuelrochat on 23.02.17.
  */
-public class Clock extends JPanel {
+abstract class Clock extends JPanel implements Observer {
 
-    public Clock() {
+    protected TimerChrono timer;
 
+    public Clock(TimerChrono timer) {
+        this.timer = timer;
+        timer.addObserver(this);
+    }
+
+    @Override
+    public void update(){
+        repaint();
     }
 }

@@ -1,5 +1,6 @@
+package observer;
+
 import java.util.LinkedList;
-import java.util.Objects;
 
 /**
  * Created by Gallouche on 24/02/2017.
@@ -8,15 +9,19 @@ public abstract class Observable {
 
     private LinkedList<Observer> observers;
 
-    public Observable(){
+    public Observable() {
+
         observers = new LinkedList<Observer>();
     }
 
-    public void notifier(){
+    public void notifiyObservers() {
         for(Observer o : observers){
             o.update();
         }
     }
+
+    //Test for unsubscribtion when closing windows
+    public int getNumberSubscribers() { return observers.size(); }
 
     public void addObserver(Observer o){
         observers.add(o);
@@ -24,10 +29,6 @@ public abstract class Observable {
 
     public void deleteObserver(Observer o){
         observers.remove(o);
-    }
-
-    public void deleteObserver(){
-        observers.clear();
     }
 
 }

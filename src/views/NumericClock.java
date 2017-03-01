@@ -3,20 +3,31 @@ package views;
 import javax.swing.*;
 import java.awt.*;
 
+import timer.TimerChrono;
+
 /**
  * Created by pierre-samuelrochat on 24.02.17.
  */
 public class NumericClock extends Clock {
 
-    protected JPanel p1;
-    protected JLabel imageLabel;
+    private JLabel timerLabel;
 
-    public NumericClock(JFrame f){
+    public NumericClock(TimerChrono timer){
 
-        p1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        p1.add(new JLabel("Timer"));
-        setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        add(p1);
-        validate();
+        super(timer);
+
+        timerLabel = new JLabel("");
+
+        setPreferredSize(new Dimension(150, 30));
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+        add(timerLabel);
     }
+
+    @Override
+    public void paint(Graphics g) {
+
+        super.paint(g);
+        timerLabel.setText(timer.getHours() + "h " + timer.getMinutes() + "m " + timer.getSeconds() + "s");
+    }
+
 }
