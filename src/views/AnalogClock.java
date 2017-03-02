@@ -63,6 +63,8 @@ public class AnalogClock extends Clock {
         g2.setColor(Color.BLUE);
         ((Graphics2D)g).draw(minutes);
 
+
+        //FIX HOURS TIME -> FALSE ANGLE *5
         endPoint = getEndPoint(timer.getHours(), hoursLength, imageSideLength);
 
         hours.setLine(centerPoint, endPoint);

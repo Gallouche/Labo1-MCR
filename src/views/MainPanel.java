@@ -125,6 +125,7 @@ public class MainPanel extends JPanel {
 
         mixedClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                
                 JFrame mixedClockFrame = new JFrame("Mixed Clock");
                 mixedClockFrame.getContentPane().setPreferredSize(new Dimension(800, 300));
 
@@ -138,7 +139,9 @@ public class MainPanel extends JPanel {
                 romanClock.setPreferredSize(new Dimension(imageSideLength, imageSideLength));
                 NumericClock numericClock = new NumericClock(timer);
 
-                jPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+                jPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
                 jPanel.add(arabicClock);
                 jPanel.add(romanClock);
                 jPanel.add(numericClock);
@@ -182,4 +185,29 @@ public class MainPanel extends JPanel {
 
 
     }
+
+    JFrame createFrame(String title, TimerChrono timer, Clock... clocks) {
+
+        JFrame frame = new JFrame(title);
+
+        for (Clock clock : clocks) {
+            frame.getContentPane().add(clock, BorderLayout.CENTER);
+        }
+
+        frame.pack();
+        frame.setVisible(true);
+        frame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+
+                for (Clock clock : clocks) {
+                    timer.deleteObserver(clock);
+                }
+            }
+        });
+
+        return frame;
+    }
+
+
 }
