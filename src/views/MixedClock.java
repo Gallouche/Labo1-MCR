@@ -1,19 +1,36 @@
+/*
 package views;
 
 import javax.swing.*;
 import java.awt.*;
 
+*/
 /**
  * Created by pierre-samuelrochat on 24.02.17.
- */
+ *//*
+
+
 public class MixedClock extends Clock {
 
-    private JPanel p1;
+    private AnalogClock arabicClock;
+    private AnalogClock romanClock;
+    private NumericClock numericClock;
+    private int minDimension;
 
-    public MixedClock(JFrame f){
+    public MixedClock(String fileName1, String fileName2, JFrame f){
 
-        p1 = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        Dimension d = f.getPreferredSize();
+        minDimension = d.width < d.height ? d.width : d.height;
 
-        f.add(p1);
+        arabicClock = new AnalogClock(fileName1);
+        arabicClock.setPreferredSize(new Dimension(minDimension, minDimension));
+        romanClock = new AnalogClock(fileName2);
+        romanClock.setPreferredSize(new Dimension(minDimension, minDimension));
+        numericClock = new NumericClock();
+
+        setLayout(new FlowLayout(FlowLayout.LEFT));
+        add(arabicClock);
+        add(romanClock);
+        add(numericClock);
     }
-}
+}*/

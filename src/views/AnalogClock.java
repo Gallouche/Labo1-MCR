@@ -1,53 +1,85 @@
 package views;
 
-import javax.swing.*;
+import timer.TimerChrono;
+
 import java.awt.*;
 import java.awt.Toolkit;
 import java.awt.geom.Line2D;
-
-
 
 /**
  * Created by pierre-samuelrochat on 25.02.17.
  */
 public class AnalogClock extends Clock {
 
-    private String fileName;
-    protected Image image;
-    protected JPanel jPanel;
-    protected JLabel imageLabel;
+    private Image image;
+
     private Line2D seconds;
     private Line2D minutes;
     private Line2D hours;
 
+    AnalogClock(TimerChrono timer, String fileName) {
 
-
-    AnalogClock(String fileName, JFrame frame){
-        System.out.println(frame.getContentPane().getWidth());
-        System.out.println(frame.getContentPane().getHeight());
+        super(timer);
 
         image = Toolkit.getDefaultToolkit().getImage(fileName);
-        image = image.getScaledInstance(frame.getContentPane().getPreferredSize().width,
-                frame.getContentPane().getPreferredSize().height, Image.SCALE_SMOOTH);
-        jPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        setLayout(new FlowLayout());
-        add(jPanel);
-
-
-        Line2D seconds = new Line2D.Float(jPanel.getWidth()/2, jPanel.getHeight()/2, 100, 20);
-        //Line2D minutes = new Line2D.Float(100, 100, 250, 260);
-        //Line2D hours = new Line2D.Float(100, 100, 250, 260);
-
-
+        seconds = new Line2D.Float();
+        minutes = new Line2D.Float();
+        hours = new Line2D.Float();
     }
 
     @Override
     public void paint(Graphics g) {
+
         super.paint(g);
-        g.drawImage(image, 0, 0, this);
+
+        Dimension d = getSize();
+        int imageSideLength = d.width < d.height ? d.width : d.height;
+
+        g.drawImage(image, 0, 0, imageSideLength, imageSideLength, this);
+
+        int imageCenterXY = imageSideLength / 2;
+
+        int secondsLength = (int)(imageSideLength * 0.4);
+        int minutesLength = (int)(imageSideLength * 0.3);
+        int hoursLength   = (int)(imageSideLength * 0.2);
+
+        Graphics2D g2 = (Graphics2D)g;
+
+        Point centerPoint = new Point(imageCenterXY, imageCenterXY);
+        Point endPoint;
+
+        endPoint = getEndPoint(timer.getSeconds(), secondsLength, imageSideLength);
+
+        seconds.setLine(centerPoint, endPoint);
+        g2.setStroke(new BasicStroke(2));
+        g2.setColor(Color.RED);
+        ((Graphics2D)g).draw(seconds);
+
+        endPoint = getEndPoint(timer.getMinutes(), minutesLength, imageSideLength);
+
+        minutes.setLine(centerPoint, endPoint);
+        g2.setStroke(new BasicStroke(3));
+        g2.setColor(Color.BLUE);
+        ((Graphics2D)g).draw(minutes);
 
 
+        //FIX HOURS TIME -> FALSE ANGLE *5
+        endPoint = getEndPoint(timer.getHours(), hoursLength, imageSideLength);
+
+        hours.setLine(centerPoint, endPoint);
+        g2.setStroke(new BasicStroke(4));
+        g2.setColor(Color.BLACK);
+        ((Graphics2D)g).draw(hours);
     }
 
+
+    private Point getEndPoint(int time, int needleLength, int imageSideLength) {
+
+        double radians = 2 * Math.PI * (time-15) / 60;
+        int x = (int)(imageSideLength / 2 + needleLength * Math.cos(radians));
+        int y = (int)(imageSideLength / 2 + needleLength * Math.sin(radians));
+
+        return (new Point(x, y));
+    }
 }
