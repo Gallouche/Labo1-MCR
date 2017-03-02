@@ -123,19 +123,7 @@ public class MainPanel extends JPanel {
 
         mixedClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
-                AnalogClock arabicClock = new AnalogClock(timer, "clock1.jpg");
-                AnalogClock romanClock = new AnalogClock(timer, "clock2.jpg");
-                NumericClock numericClock = new NumericClock(timer);
-
-                JFrame mixedClockFrame = createFrame("Mixed Clock", timer, arabicClock, romanClock, numericClock);
-                mixedClockFrame.getContentPane().setPreferredSize(new Dimension(800, 300));
-
-                int imageSideLength = Math.min(mixedClockFrame.getPreferredSize().width, mixedClockFrame.getPreferredSize().height);
-                arabicClock.setPreferredSize(new Dimension(imageSideLength, imageSideLength));
-                romanClock.setPreferredSize(new Dimension(imageSideLength, imageSideLength));
-
-                /*
+                
                 JFrame mixedClockFrame = new JFrame("Mixed Clock");
                 mixedClockFrame.getContentPane().setPreferredSize(new Dimension(800, 300));
 
@@ -165,8 +153,6 @@ public class MainPanel extends JPanel {
                         timer.deleteObserver(numericClock);
                     }
                 });
-
-                */
 
 
             }
