@@ -26,7 +26,7 @@ public class TimerChrono extends Observable {
         minutes = 0;
         hours = 0;
 
-        timer = new Timer(1000, new ActionListener() {
+        timer = new Timer(1, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 

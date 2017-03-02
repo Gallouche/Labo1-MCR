@@ -49,14 +49,14 @@ public class AnalogClock extends Clock {
         Point centerPoint = new Point(imageCenterXY, imageCenterXY);
         Point endPoint;
 
-        endPoint = getEndPoint(timer.getSeconds(), secondsLength, imageSideLength);
+        endPoint = getEndPoint(timer.getSeconds(), secondsLength, imageSideLength, 60);
 
         seconds.setLine(centerPoint, endPoint);
         g2.setStroke(new BasicStroke(2));
         g2.setColor(Color.RED);
         ((Graphics2D)g).draw(seconds);
 
-        endPoint = getEndPoint(timer.getMinutes(), minutesLength, imageSideLength);
+        endPoint = getEndPoint(timer.getMinutes(), minutesLength, imageSideLength, 60);
 
         minutes.setLine(centerPoint, endPoint);
         g2.setStroke(new BasicStroke(3));
@@ -65,7 +65,7 @@ public class AnalogClock extends Clock {
 
 
         //FIX HOURS TIME -> FALSE ANGLE *5
-        endPoint = getEndPoint(timer.getHours(), hoursLength, imageSideLength);
+        endPoint = getEndPoint(timer.getHours(), hoursLength, imageSideLength, 12);
 
         hours.setLine(centerPoint, endPoint);
         g2.setStroke(new BasicStroke(4));
@@ -74,9 +74,9 @@ public class AnalogClock extends Clock {
     }
 
 
-    private Point getEndPoint(int time, int needleLength, int imageSideLength) {
+    private Point getEndPoint(int time, int needleLength, int imageSideLength, int div) {
 
-        double radians = 2 * Math.PI * (time-15) / 60;
+        double radians = 2 * Math.PI * (time-15) / div;
         int x = (int)(imageSideLength / 2 + needleLength * Math.cos(radians));
         int y = (int)(imageSideLength / 2 + needleLength * Math.sin(radians));
 
