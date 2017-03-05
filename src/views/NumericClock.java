@@ -14,12 +14,11 @@ public class NumericClock extends Clock {
 
     public NumericClock(TimerChrono timer){
 
-        super(timer);
+        super(timer, "Numeric Clock");
+
+        setPreferredSize(new Dimension(200, 30));
 
         timerLabel = new JLabel("");
-
-        setPreferredSize(new Dimension(150, 30));
-        setLayout(new FlowLayout(FlowLayout.CENTER));
         add(timerLabel);
     }
 

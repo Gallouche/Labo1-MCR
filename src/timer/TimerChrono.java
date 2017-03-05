@@ -26,7 +26,7 @@ public class TimerChrono extends Observable {
         minutes = 0;
         hours = 0;
 
-        timer = new Timer(1, new ActionListener() {
+        timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -44,7 +44,9 @@ public class TimerChrono extends Observable {
         timer.start();
     }
 
-    public void stop(){ timer.stop(); }
+    public void stop(){
+        timer.stop();
+    }
 
     public void reset(){
 
@@ -61,4 +63,12 @@ public class TimerChrono extends Observable {
     public int getMinutes() { return minutes; }
 
     public int getHours() { return hours; }
+
+    public void switchState() {
+        if(timer.isRunning()) {
+            timer.stop();
+        } else  {
+            timer.start();
+        }
+    }
 }

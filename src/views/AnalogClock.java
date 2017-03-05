@@ -2,6 +2,7 @@ package views;
 
 import timer.TimerChrono;
 
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.Toolkit;
 import java.awt.geom.Line2D;
@@ -9,19 +10,17 @@ import java.awt.geom.Line2D;
 /**
  * Created by pierre-samuelrochat on 25.02.17.
  */
-public class AnalogClock extends Clock {
-
-    private Image image;
+public abstract class AnalogClock extends Clock {
 
     private Line2D seconds;
     private Line2D minutes;
     private Line2D hours;
 
-    AnalogClock(TimerChrono timer, String fileName) {
+    AnalogClock(TimerChrono timer, String name) {
 
-        super(timer);
+        super(timer, name);
 
-        image = Toolkit.getDefaultToolkit().getImage(fileName);
+        setPreferredSize(new Dimension(300, 300));
 
         seconds = new Line2D.Float();
         minutes = new Line2D.Float();
@@ -36,15 +35,15 @@ public class AnalogClock extends Clock {
         Dimension d = getSize();
         int imageSideLength = d.width < d.height ? d.width : d.height;
 
-        g.drawImage(image, 0, 0, imageSideLength, imageSideLength, this);
+        g.drawImage(getImage(), 0, 0, imageSideLength, imageSideLength, this);
+
+        Graphics2D g2 = (Graphics2D)g;
 
         int imageCenterXY = imageSideLength / 2;
 
         int secondsLength = (int)(imageSideLength * 0.4);
         int minutesLength = (int)(imageSideLength * 0.3);
         int hoursLength   = (int)(imageSideLength * 0.2);
-
-        Graphics2D g2 = (Graphics2D)g;
 
         Point centerPoint = new Point(imageCenterXY, imageCenterXY);
         Point endPoint;
@@ -74,6 +73,7 @@ public class AnalogClock extends Clock {
     }
 
 
+
     private Point getEndPoint(int time, int needleLength, int imageSideLength, int div) {
 
         double radians = 2 * Math.PI * (time-15) / div;
@@ -82,4 +82,6 @@ public class AnalogClock extends Clock {
 
         return (new Point(x, y));
     }
+
+    abstract Image getImage();
 }

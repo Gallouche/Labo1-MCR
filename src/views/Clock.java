@@ -11,9 +11,11 @@ import javax.swing.*;
 abstract class Clock extends JPanel implements Observer {
 
     protected TimerChrono timer;
+    private final String name;
 
-    public Clock(TimerChrono timer) {
+    public Clock(TimerChrono timer, String name) {
         this.timer = timer;
+        this.name = name;
         timer.addObserver(this);
     }
 
@@ -21,4 +23,6 @@ abstract class Clock extends JPanel implements Observer {
     public void update(){
         repaint();
     }
+
+    public String getPanelName() { return name; }
 }

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import timer.TimerChrono;
 
@@ -66,20 +68,9 @@ public class MainPanel extends JPanel {
 
         arabicClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JFrame arabicClockFrame = new JFrame("Arabic Clock");
-                arabicClockFrame.getContentPane().setPreferredSize(new Dimension(300, 300));
-                AnalogClock arabicClock = new AnalogClock(timer, imagePath1);
-                arabicClockFrame.getContentPane().add(arabicClock, BorderLayout.CENTER);
-                arabicClockFrame.pack();
-                arabicClockFrame.setVisible(true);
-                arabicClockFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                        System.out.println(timer.getNumberSubscribers());
-                        timer.deleteObserver(arabicClock);
-                        System.out.println(timer.getNumberSubscribers());
-                    }
-                });
+
+                ArabicClock arabicClock = new ArabicClock(timer);
+                createFrame(timer, arabicClock);
 
             }
         });
@@ -87,90 +78,38 @@ public class MainPanel extends JPanel {
 
         romanClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JFrame romanClockFrame = new JFrame("Roman Clock");
-                romanClockFrame.getContentPane().setPreferredSize(new Dimension(300, 300));
-                AnalogClock romanClock = new AnalogClock(timer, imagePath2);
-                romanClockFrame.getContentPane().add(romanClock, BorderLayout.CENTER);
-                romanClockFrame.pack();
-                romanClockFrame.setVisible(true);
-                romanClockFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                        timer.deleteObserver(romanClock);
-                    }
-                });
+                RomanClock romanClock = new RomanClock(timer);
+                createFrame(timer, romanClock);
 
             }
         });
 
         numericClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JFrame numericClockFrame = new JFrame("Numeric Clock");
-                numericClockFrame.getContentPane().setPreferredSize(new Dimension(200, 30));
 
                 NumericClock numericClock = new NumericClock(timer);
-
-                numericClockFrame.getContentPane().add(numericClock, BorderLayout.CENTER);
-                numericClockFrame.pack();
-                numericClockFrame.setVisible(true);
-                numericClockFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                        timer.deleteObserver(numericClock);
-                    }
-                });
+                createFrame(timer, numericClock);
 
             }
         });
 
         mixedClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
-                JFrame mixedClockFrame = new JFrame("Mixed Clock");
-                mixedClockFrame.getContentPane().setPreferredSize(new Dimension(800, 300));
 
-                JPanel jPanel = new JPanel();
-
-                int imageSideLength = Math.min(mixedClockFrame.getPreferredSize().width, mixedClockFrame.getPreferredSize().height);
-
-                AnalogClock arabicClock = new AnalogClock(timer, "clock1.jpg");
-                arabicClock.setPreferredSize(new Dimension(imageSideLength, imageSideLength));
-                AnalogClock romanClock = new AnalogClock(timer, "clock2.jpg");
-                romanClock.setPreferredSize(new Dimension(imageSideLength, imageSideLength));
+                ArabicClock arabicClock = new ArabicClock(timer);
+                RomanClock romanClock = new RomanClock(timer);
                 NumericClock numericClock = new NumericClock(timer);
-
-
-                jPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-
-                jPanel.add(arabicClock);
-                jPanel.add(romanClock);
-                jPanel.add(numericClock);
-
-                mixedClockFrame.getContentPane().add(jPanel, BorderLayout.CENTER);
-                mixedClockFrame.pack();
-                mixedClockFrame.setVisible(true);
-                mixedClockFrame.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-                        timer.deleteObserver(arabicClock);
-                        timer.deleteObserver(romanClock);
-                        timer.deleteObserver(numericClock);
-                    }
-                });
+                createFrame(timer, arabicClock, romanClock, numericClock);
 
             }
         });
 
         startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                timer.start();
-            }
+            public void actionPerformed(ActionEvent e) { timer.start(); }
         });
 
         stopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                timer.stop();
-            }
+            public void actionPerformed(ActionEvent e) { timer.stop(); }
         });
 
         resetButton.addActionListener(new ActionListener() {
@@ -178,24 +117,35 @@ public class MainPanel extends JPanel {
         });
 
         quitButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
+            public void actionPerformed(ActionEvent e) { System.exit(0); }
         });
 
 
     }
 
-    JFrame createFrame(String title, TimerChrono timer, Clock... clocks) {
+    void createFrame(TimerChrono timer, Clock... clocks) {
 
-        JFrame frame = new JFrame(title);
+        JFrame frame = new JFrame();
 
-        for (Clock clock : clocks) {
-            frame.getContentPane().add(clock, BorderLayout.CENTER);
+        if(clocks.length > 1) {
+            frame.setLayout(new FlowLayout(FlowLayout.CENTER));
+            frame.setName("Mixed Clock");
+        } else {
+            frame.setLayout(new BorderLayout());
+            frame.setName(clocks[0].getPanelName());
         }
 
-        frame.pack();
-        frame.setVisible(true);
+        for (Clock clock : clocks) {
+            frame.getContentPane().add(clock);
+        }
+
+        frame.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                timer.switchState();
+            }
+        });
+
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -206,7 +156,8 @@ public class MainPanel extends JPanel {
             }
         });
 
-        return frame;
+        frame.pack();
+        frame.setVisible(true);
     }
 
 
