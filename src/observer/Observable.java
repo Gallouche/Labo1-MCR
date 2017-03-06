@@ -3,7 +3,10 @@ package observer;
 import java.util.LinkedList;
 
 /**
- * Created by Gallouche on 24/02/2017.
+ * File: Observable.java
+ * Created by Rochat P-S. & Gallandat T.
+ * Date: 09/03/2017
+ * Description: Implementation of an personal Observable class.
  */
 public abstract class Observable {
 
@@ -14,19 +17,27 @@ public abstract class Observable {
         observers = new LinkedList<Observer>();
     }
 
+    /**
+     * Desciption: method who take all observers of this Observable object and call the method update for each.
+     */
     public void notifiyObservers() {
         for(Observer o : observers){
             o.update();
         }
     }
 
-    //Test for unsubscribtion when closing windows
-    public int getNumberSubscribers() { return observers.size(); }
-
+    /**
+     *
+     * @param o the new observer you want to add in the list.
+     */
     public void addObserver(Observer o){
         observers.add(o);
     }
 
+    /**
+     *
+     * @param o the observer you want to delete from the list.
+     */
     public void deleteObserver(Observer o){
         observers.remove(o);
     }

@@ -6,12 +6,20 @@ import java.awt.*;
 import timer.TimerChrono;
 
 /**
- * Created by pierre-samuelrochat on 24.02.17.
+ * File: NumericClock.java
+ * Created by Rochat P-S. & Gallandat T.
+ * Date: 09/03/2017
+ * Description: Implement the class NumericClock which is a specific type of clock that display the timer in a numeric
+ *              way.
  */
 public class NumericClock extends Clock {
 
     private JLabel timerLabel;
 
+    /**
+     * Description: create a numeric clock and create a new JLabel to display the chronometer.
+     * @param timer
+     */
     public NumericClock(TimerChrono timer){
 
         super(timer, "Numeric Clock");
@@ -22,6 +30,11 @@ public class NumericClock extends Clock {
         add(timerLabel);
     }
 
+    /**
+     * Description: override the paint method by calling the super method and set the text from the JLabel at the
+     *              correct time at each update.
+     * @param g
+     */
     @Override
     public void paint(Graphics g) {
 

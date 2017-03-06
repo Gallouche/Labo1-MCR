@@ -1,17 +1,19 @@
 package views;
 
 import timer.TimerChrono;
-
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.Toolkit;
 import java.awt.geom.Line2D;
 
 /**
- * Created by pierre-samuelrochat on 25.02.17.
+ * File: AnalogClock.java
+ * Created by Rochat P-S. & Gallandat T.
+ * Date: 09/03/2017
+ * Description: Implement the AnalogClock class extended from Clock. This class provide the canvas for the analogic
+ *              clocks, it takes a timer and a name in parameters.
  */
 public abstract class AnalogClock extends Clock {
 
+    //2D line for the representation of the 3 needles
     private Line2D seconds;
     private Line2D minutes;
     private Line2D hours;
@@ -20,6 +22,7 @@ public abstract class AnalogClock extends Clock {
 
         super(timer, name);
 
+        //set the dimension of the frame
         setPreferredSize(new Dimension(300, 300));
 
         seconds = new Line2D.Float();
@@ -27,6 +30,10 @@ public abstract class AnalogClock extends Clock {
         hours = new Line2D.Float();
     }
 
+    /**
+     * Description: method used for paint the needles
+     * @param g
+     */
     @Override
     public void paint(Graphics g) {
 
@@ -62,8 +69,6 @@ public abstract class AnalogClock extends Clock {
         g2.setColor(Color.BLUE);
         ((Graphics2D)g).draw(minutes);
 
-
-        //FIX HOURS TIME -> FALSE ANGLE *5
         endPoint = getEndPoint(timer.getHours(), hoursLength, imageSideLength, 12);
 
         hours.setLine(centerPoint, endPoint);

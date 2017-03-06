@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>observer.Observable</OriginalElement>
+  <nodes>
+    <node x="465.4828226555246" y="1159.4586815227485">views.MainPanel</node>
+    <node x="135.0" y="478.0">views.AnalogClock</node>
+    <node x="386.75" y="0.0">observer.Observer</node>
+    <node x="877.0" y="0.0">observer.Observable</node>
+    <node x="316.25" y="150.0">views.Clock</node>
+    <node x="525.0" y="566.0">views.NumericClock</node>
+    <node x="906.0" y="328.0">timer.TimerChrono</node>
+    <node x="330.0" y="894.0">views.ArabicClock</node>
+    <node x="981.8774373259052" y="1176.3853296193129">Main</node>
+    <node x="0.0" y="894.0">views.RomanClock</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="views.Clock" target="observer.Observer">
+      <point x="0.0" y="-139.0" />
+      <point x="0.0" y="50.0" />
+    </edge>
+    <edge source="views.NumericClock" target="views.Clock">
+      <point x="0.0" y="-95.0" />
+      <point x="678.5" y="453.0" />
+      <point x="590.75" y="453.0" />
+      <point x="91.5" y="139.0" />
+    </edge>
+    <edge source="views.MainPanel" target="timer.TimerChrono">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="views.AnalogClock" target="views.Clock">
+      <point x="0.0" y="-183.0" />
+      <point x="320.0" y="453.0" />
+      <point x="407.75" y="453.0" />
+      <point x="-91.5" y="139.0" />
+    </edge>
+    <edge source="views.MainPanel" target="views.ArabicClock">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Main" target="views.MainPanel">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="timer.TimerChrono" target="observer.Observable">
+      <point x="0.0" y="-315.0" />
+      <point x="0.0" y="139.0" />
+    </edge>
+    <edge source="views.RomanClock" target="views.AnalogClock">
+      <point x="0.0" y="-117.0" />
+      <point x="155.0" y="869.0" />
+      <point x="227.5" y="869.0" />
+      <point x="-92.5" y="183.0" />
+    </edge>
+    <edge source="views.ArabicClock" target="views.AnalogClock">
+      <point x="0.0" y="-117.0" />
+      <point x="485.0" y="869.0" />
+      <point x="412.5" y="869.0" />
+      <point x="92.5" y="183.0" />
+    </edge>
+    <edge source="views.MainPanel" target="views.NumericClock">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="Main" target="timer.TimerChrono">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="observer.Observable" target="observer.Observer">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="views.MainPanel" target="views.RomanClock">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="views.Clock" target="timer.TimerChrono">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5907844212835984" x="691.4610027855153" y="821.5000000000001" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
