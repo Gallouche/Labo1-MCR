@@ -7,7 +7,11 @@ import java.awt.event.*;
 import timer.TimerChrono;
 
 /**
- * Created by pierre-samuelrochat on 11.01.17.
+ * File: MainPanel.java
+ * Created by Rochat P-S. & Gallandat T.
+ * Date: 09/03/2017
+ * Description: Implement the class MainPanel who will create the main panel of the program and will create all the
+ *              useful button.
  */
 public class MainPanel extends JPanel {
 
