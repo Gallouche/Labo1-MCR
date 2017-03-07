@@ -20,26 +20,30 @@ public abstract class Observable {
     /**
      * Desciption: method who take all observers of this Observable object and call the method update for each.
      */
-    public void notifiyObservers() {
+    public void notifyObservers() {
         for(Observer o : observers){
             o.update();
         }
     }
 
     /**
-     *
+     * Description: add a new observer if it's not already in the list.
      * @param o the new observer you want to add in the list.
      */
     public void addObserver(Observer o){
-        observers.add(o);
+
+        if (!observers.contains(o))
+            observers.add(o);
     }
 
     /**
-     *
+     * Description: delete an observer from the list if it's in the list.
      * @param o the observer you want to delete from the list.
      */
     public void deleteObserver(Observer o){
-        observers.remove(o);
+
+        if(observers.contains(o))
+            observers.remove(o);
     }
 
 }

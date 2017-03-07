@@ -44,7 +44,7 @@ public class TimerChrono extends Observable {
                 minutes = (counter / 60) % 60;
                 hours   = (counter / 3600) % 12;
 
-                notifiyObservers();
+                notifyObservers();
             }
         });
     }
@@ -73,7 +73,7 @@ public class TimerChrono extends Observable {
         minutes = 0;
         hours   = 0;
 
-        notifiyObservers();
+        notifyObservers();
     }
 
     /**
