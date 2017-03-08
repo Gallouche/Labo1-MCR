@@ -10,7 +10,7 @@ import javax.swing.*;
  * Created by Rochat P-S. & Gallandat T.
  * Date: 09/03/2017
  * Description: implement the class Clock who represent a generic panel for each type of clock. It extends Observer and
- *              will look at TimerChrono.
+ *              will observe a TimerChrono object.
  */
 abstract class Clock extends JPanel implements Observer {
 
@@ -18,9 +18,9 @@ abstract class Clock extends JPanel implements Observer {
     private final String name;
 
     /**
-     * Description: Create and add the clock to the timer observers list.
-     * @param timer timer to observe
-     * @param name name of the clock
+     * Description: Create and add the clock to the timer's observers list.
+     * @param timer timer to observe.
+     * @param name name of the clock.
      */
     public Clock(TimerChrono timer, String name) {
         this.timer = timer;
@@ -29,8 +29,8 @@ abstract class Clock extends JPanel implements Observer {
     }
 
     /**
-     * Description: override of the method update from Observer by calling the method repaint for a component.
-     *              it will do the change on the needles or in the digit of the numeric clock.
+     * Description: override of the update method from Observer Interface.
+     *              it will update the timer graphic representation by repainting it.
      */
     @Override
     public void update(){
@@ -38,7 +38,7 @@ abstract class Clock extends JPanel implements Observer {
     }
 
     /**
-     * Description: getter on the name of the panel
+     * Description: get the name of the panel
      * @return String name
      */
     public String getPanelName() { return name; }

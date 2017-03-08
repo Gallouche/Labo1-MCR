@@ -17,7 +17,7 @@ public class NumericClock extends Clock {
     private JLabel timerLabel;
 
     /**
-     * Description: create a numeric clock and create a new JLabel to display the chronometer.
+     * Description: create a numeric clock and create a new JLabel to display the timer.
      * @param timer
      */
     public NumericClock(TimerChrono timer){
@@ -32,8 +32,8 @@ public class NumericClock extends Clock {
 
     /**
      * Description: override the paint method by calling the super method and set the text from the JLabel at the
-     *              correct time at each update.
-     * @param g
+     *              correct time.
+     * @param g the Graphics object
      */
     @Override
     public void paint(Graphics g) {

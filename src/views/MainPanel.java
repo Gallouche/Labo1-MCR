@@ -10,24 +10,28 @@ import timer.TimerChrono;
  * File: MainPanel.java
  * Created by Rochat P-S. & Gallandat T.
  * Date: 09/03/2017
- * Description: Implement the class MainPanel who will create the main panel of the program and will create all the
+ * Description: Implement the class MainPanel that creates the main panel of the program and creates all the
  *              useful button.
  */
 public class MainPanel extends JPanel {
 
+    // Panels that will contain the buttons
     private JPanel p1;
     private JPanel p2;
 
+    // Buttons for clocks creation
     private JButton romanClockButton;
     private JButton arabicClockButton;
     private JButton numericClockButton;
     private JButton mixedClockButton;
 
+    // Buttons for others features
     private JButton startButton;
     private JButton stopButton;
     private JButton resetButton;
     private JButton quitButton;
 
+    // The timer used by the clocks
     private TimerChrono timer;
 
 
@@ -66,6 +70,7 @@ public class MainPanel extends JPanel {
         add(p1);
         add(p2);
 
+        // Definition of behaviour when buttons are pressed
 
         arabicClockButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -125,6 +130,12 @@ public class MainPanel extends JPanel {
 
     }
 
+    /**
+     * Description: Create a frame and add the clocks to it.
+     *              Define the behaviour when we click on the frame and when we close it.
+     * @param timer the timer used by the clocks.
+     * @param clocks the clock(s) used to create the frame.
+     */
     void createFrame(TimerChrono timer, Clock... clocks) {
 
         JFrame frame = new JFrame();
@@ -141,13 +152,17 @@ public class MainPanel extends JPanel {
             frame.getContentPane().add(clock);
         }
 
+        // Make the timer switch its state when the frame is clicked
         frame.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+
                 timer.switchState();
+
             }
         });
 
+        // Unsubscribe the clock(s) from timer observation when the frame is closed
         frame.addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {

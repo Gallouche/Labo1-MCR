@@ -18,7 +18,7 @@ public abstract class Observable {
     }
 
     /**
-     * Desciption: method who take all observers of this Observable object and call the method update for each.
+     * Desciption: calls update on every subscribed object as an observer.
      */
     public void notifyObservers() {
         for(Observer o : observers){

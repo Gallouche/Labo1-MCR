@@ -8,7 +8,7 @@ import java.awt.Toolkit;
  * File: ArabicClock.java
  * Created by Rochat P-S. & Gallandat T.
  * Date: 09/03/2017
- * Description: Implement the class ArabicClock which is a specific type of clock with arabic number on the
+ * Description: Implement the ArabicClock class which is a specific type of clock with arabic number on the
  *              background image.
  */
 public class ArabicClock extends AnalogClock {
@@ -26,7 +26,7 @@ public class ArabicClock extends AnalogClock {
     }
 
     /**
-     * Description: getter on the background image of the clock.
+     * Description: get the background image of the clock.
      * @return Image image
      */
     Image getImage() { return image; }

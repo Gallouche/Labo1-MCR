@@ -10,8 +10,7 @@ import observer.Observable;
  * File: TimerChrono.java
  * Created by Rochat P-S. & Gallandat T.
  * Date: 09/03/2017
- * Description: Implementation of the class TimerChrono as an observable. All the clock will look at him and react
- *              from his call at notify() method to modify their state and update their timer.
+ * Description: Implementation of the class TimerChrono as an Observable.
  */
 public class TimerChrono extends Observable {
 
@@ -25,8 +24,7 @@ public class TimerChrono extends Observable {
 
     /**
      * Description: constructor of the TimerChrono class. Create a new timer and redefine the
-     *              actionPerformed method to match with our implementation. Here the actionPerformed count each "tic"
-     *              and store them by seconds, minutes and hours elapse.
+     *              actionPerformed method.
      */
     public TimerChrono(){
 
@@ -35,6 +33,8 @@ public class TimerChrono extends Observable {
         minutes = 0;
         hours = 0;
 
+        // Creates a new timer that increments the counter every second, recalculates the other variables
+        // and notify the observers
         timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,25 +77,25 @@ public class TimerChrono extends Observable {
     }
 
     /**
-     * Description: getter on seconds elapse in the current minute.
-     * @return seconds in int.
+     * Description: get the seconds elapsed.
+     * @return seconds
      */
     public int getSeconds() { return seconds; }
 
     /**
-     * Description: getter on minutes elapse in the current hour.
-     * @return minutes in int.
+     * Description: get the minutes elapsed.
+     * @return minutes
      */
     public int getMinutes() { return minutes; }
 
     /**
-     * Description: getter on hours elpase in the current timer.
-     * @return hours in int.
+     * Description: get the hours elapsed.
+     * @return hours
      */
     public int getHours() { return hours; }
 
     /**
-     * Description: method to swtich the state of the timer:
+     * Description: swtiche the state of the timer:
      *              - if the timer is running, the timer will stop.
      *              - if the timer is not running, the timer will start.
      */

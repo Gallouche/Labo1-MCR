@@ -27,7 +27,7 @@ public class RomanClock extends AnalogClock {
     }
 
     /**
-     * Description: getter on the background image of the clock.
+     * Description: get the background image of the clock.
      * @return Image image
      */
     Image getImage() { return image; }

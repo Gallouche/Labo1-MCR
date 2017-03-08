@@ -22,7 +22,7 @@ public abstract class AnalogClock extends Clock {
 
         super(timer, name);
 
-        //set the dimension of the frame
+        //Sets the dimensions of the clock
         setPreferredSize(new Dimension(300, 300));
 
         seconds = new Line2D.Float();
@@ -31,15 +31,17 @@ public abstract class AnalogClock extends Clock {
     }
 
     /**
-     * Description: method used for paint the needles
-     * @param g
+     * Description: paint the background image and the needles.
+     * @param g the Graphics object
      */
     @Override
     public void paint(Graphics g) {
 
         super.paint(g);
 
+        // Get the current size of the panel
         Dimension d = getSize();
+        // Set the image side length as the shortest side of the panel
         int imageSideLength = d.width < d.height ? d.width : d.height;
 
         g.drawImage(getImage(), 0, 0, imageSideLength, imageSideLength, this);
@@ -48,6 +50,7 @@ public abstract class AnalogClock extends Clock {
 
         int imageCenterXY = imageSideLength / 2;
 
+        // Length of the needles
         int secondsLength = (int)(imageSideLength * 0.4);
         int minutesLength = (int)(imageSideLength * 0.3);
         int hoursLength   = (int)(imageSideLength * 0.2);
@@ -55,22 +58,20 @@ public abstract class AnalogClock extends Clock {
         Point centerPoint = new Point(imageCenterXY, imageCenterXY);
         Point endPoint;
 
+        // Drawings of the needles
         endPoint = getEndPoint(timer.getSeconds(), secondsLength, imageSideLength, 60);
-
         seconds.setLine(centerPoint, endPoint);
         g2.setStroke(new BasicStroke(2));
         g2.setColor(Color.RED);
         ((Graphics2D)g).draw(seconds);
 
         endPoint = getEndPoint(timer.getMinutes(), minutesLength, imageSideLength, 60);
-
         minutes.setLine(centerPoint, endPoint);
         g2.setStroke(new BasicStroke(3));
         g2.setColor(Color.BLUE);
         ((Graphics2D)g).draw(minutes);
 
         endPoint = getEndPoint(timer.getHours(), hoursLength, imageSideLength, 12);
-
         hours.setLine(centerPoint, endPoint);
         g2.setStroke(new BasicStroke(4));
         g2.setColor(Color.BLACK);
@@ -78,7 +79,14 @@ public abstract class AnalogClock extends Clock {
     }
 
 
-
+    /**
+     * Description: Calculate the coordinates x and y of the end point and returns the point.
+     * @param time the current time in seconds, minutes or hours.
+     * @param needleLength
+     * @param imageSideLength
+     * @param div number of increments (60 for minutes and seconds, 12 for hours).
+     * @return Point endPoint
+     */
     private Point getEndPoint(int time, int needleLength, int imageSideLength, int div) {
 
         double radians = 2 * Math.PI * (time-15) / div;
@@ -88,5 +96,8 @@ public abstract class AnalogClock extends Clock {
         return (new Point(x, y));
     }
 
+    /**
+     * Description: Specification of the method getImage used to get the image from subclasses in draw method.
+     */
     abstract Image getImage();
 }
