@@ -1,0 +1,117 @@
+@startuml
+class Main{
+  +void main(String[])
+}
+
+abstract class Observable{
+  -LinkedList<Observer> observers
+
+  +Observable()
+  +void notifyObservers()
+  +void addObserver(Observer)
+  +void deleteObserver(Observer)
+}
+abstract class Clock{
+  #TimerChrono timer
+  -String name
+
+  +Clock(TimerChrono,String)
+  +void update()
+  +String getPanelName()
+
+}
+
+class TimerChrono{
+  -Timer timer
+  -int counter
+  -int seconds
+  -int minutes
+  -int hours
+
+  +TimerChrono()
+  +void start()
+  +void stop()
+  +void reset()
+  +int getSeconds()
+  +int getMinutes()
+  +int getHours()
+  +void switchState()
+}
+
+abstract class AnalogClock{
+  -Line2D seconds
+  -Line2D minutes
+  -Line2D hours
+
+  {abstract} AnalogClock(TimerChrono,String)
+  +void paint(Graphics)
+  {abstract}Image getImage()
+  -Point getEndPoint(int,int,int,int)
+}
+
+class RomanClock{
+  #String fileName
+  -Image image
+
+  +RomanClock(TimerChrono)
+  #Image getImage()
+}
+
+class ArabicClock{
+  #String fileName
+  -Image image
+
+  +ArabicClock(TimerChrono)
+  #Image getImage()
+}
+
+class MainPanel{
+  -Jpanel p1
+  -Jpanel p2
+  -JButton romanClockButton
+  -JButton arabicClockButton
+  -JButton numercicClockButton
+  -JButton mixedClockButton
+  -JButton startButton
+  -JButton stopButton
+  -JButton resetButton
+  -JButton quitButton
+  -TimerChrono timer
+
+  +MainPanel(TimerChrono)
+  #void createFrame(TimerChrono,Clock...)
+
+}
+
+interface Observer{
+  +{abstract} void update()
+}
+
+class NumericClock{
+  -Jlabel timerLabel
+
+  +NumericClock(TimerChrono)
+  +void paint()
+}
+
+'héritage
+Observer <|-- Clock
+Clock <|-- AnalogClock
+Clock <|-- NumericClock
+AnalogClock <|-- RomanClock
+AnalogClock <|-- ArabicClock
+Observable <|-- TimerChrono
+
+'associations
+Observable "1" *--> "*" Observer
+Clock "1" *--> "1" TimerChrono
+MainPanel "1" *--> "1" TimerChrono
+
+'creation
+Main .. TimerChrono : <<create>>
+Main .. MainPanel : <<create>>
+MainPanel .. NumericClock : <<create>>
+MainPanel .. ArabicClock : <<create>>
+MainPanel .. RomanClock : <<create>>
+
+@enduml
